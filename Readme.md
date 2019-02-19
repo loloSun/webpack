@@ -13,14 +13,14 @@ npm install webpack webpack-cli
 ## 手动配置webpack 
 - 默认配置文件的名字是webpack.config.js
 - webpack 是node写出来的 
-# 配置出口入口
+### 配置出口入口
 - entry : 入口 可以是相对路径
 - output : 出口 输出 必须是绝对路径
   - path : 输出的文件路径 必须是绝对路径
   - filename : 输出的文件名字
 - mode 的值 一般是两个值 development开发环境 production生产环境(所有的代码都会被压缩)
 如果不配置 默认是production生产环境
-# 开发服务器配置 
+### 开发服务器配置 
 - yarn add webpack-dev-server -D
 ```
 devServer:{
@@ -241,7 +241,7 @@ img.src = logo
 document.body.appengChild(img)
 ```
 - 在css 引入 background(url)
-- <img src=''/>
+- ```<img src=''/>```
 
 ## 图片处理 
 yarn add file-loader html-withimg-loader url-loader -D
@@ -302,7 +302,7 @@ output: {
 options:{
   limit:1,
   outputPath:'/img/',
-  publicPath:'http://www.baidu.cn'
+    publicPath:'http://www.baidu.cn'
 }
 ```
 
