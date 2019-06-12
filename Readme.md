@@ -2,37 +2,39 @@
 ## webpack 安装 
 安装本地的webpack 
 ```
-yarn add webpack webpack-cli -D // -D(dev development 开发环境)
+yarn add webpack webpack-cli -D  //-D(dev development 开发环境)
 或
 npm install webpack webpack-cli 
 ```
 
 ## webpack 可以进行0配置
 - 目录结构
+```
   - src
     - index
+```
 - 直接运行 
 ```
 npx webpack 
 ```
-- 打包工具->输出后的结果(js模块)
+- 打包工具 -> 输出后的结果(js模块)
 - 打包（直接js的模块化）
 - src一般表示源码文件夹
 
 ## 手动配置webpack 
-- * 默认配置文件的名字 webpack.config.js(常用) 或 webpackfile.js(不常用)
+- **默认配置文件的名字 webpack.config.js(常用) 或 webpackfile.js(不常用)**
 - webpack 是node写出来的 
-### * 配置出口入口
+### `1. 配置出口入口`
 - entry : 入口 可以是相对路径
 - output : 出口 输出 必须是绝对路径
   - path : 输出的文件路径 必须是绝对路径
   - filename : 输出的文件名字
-### * 配置打包环境
+### `2. 配置打包环境`
 - mode 的值 一般是两个值 
   - development 开发环境 
   - production 生产环境(所有的代码都会被压缩)
-如果不配置 默认是production生产环境
-### * 开发服务器配置 
+> 如果不配置 默认是production生产环境
+### `3. 开发服务器配置`
 ```
 yarn add webpack-dev-server -D
 
@@ -48,7 +50,7 @@ devServer:{
   ···
 }
 ```
-## * 脚本命令 package.json 
+## `脚本命令 package.json`
 script:配置脚本
 ```
 "build": "webpack --config webpack.config.js",  // 运行环境
@@ -60,20 +62,23 @@ script:配置脚本
 
 ## 处理html 
 - 目录结构
+```
   - src
     - index.js
     - index.html
-- plugins ：插件集合 当有插件的时候需要配置plugins 类型是数组
 ```
-  * yarn add  html-webpack-plugin
+- **plugins ：插件集合 当有插件的时候需要配置plugins,类型是数组**
+```
+  yarn add  html-webpack-plugin
 ```
   - 在src目录下面建立一个index.html文件
-  - 当有插件的时候需要配置plugins 类型是数组
+  - 当有插件的时候需要配置plugins,类型是数组
   - 每一个插件都是通过new来调用 例：new HtmlWebpackPlugin()
   - 可以运行 npm run dev/npm run build 查看结果
 ```
-* template:'./src/index.html',  // 以谁做为模板
-* filename:'index.html',   // 编译后的文件名（真正用到的文件）
+  template:'./src/index.html',  // 以谁做为模板
+  filename:'index.html',   // 编译后的文件名（真正用到的文件）
+  
   hash:true,  // 加hash值 
   minify:{   // 压缩配置   
     removeAttributeQuotes:true,   // 去除双引号
@@ -90,17 +95,19 @@ filename:'bundle[hash:8].js'
 
 ## 处理样式
 - 目录结构
+```
   - src
     - index.html
     - index.js
     - style.css
+```
 - index.js 通过引用 require('/index.css') 报错如下 
 ```
 You may need an appropriate loader to handle this file type.
 // appropriate:合适的  loader:装载器，载入程序
 // 你可能需要一个合适的装载器
 ```
-- 配置module -> 配置rules数组，表示很多规则用正在匹配js、css等 -> rules里面配置不同的loader，每个loader的配置都是一个对象
+- 配置module -> 配置 rules 数组，表示很多规则用正在匹配 js、css 等 -> rules 里面配置不同的 loader，每个 loader 的配置都是一个对象
 ```
 module:{
   rules:[
@@ -114,38 +121,38 @@ module:{
   ]
 }
 ```
-- * loader的配置方法：test匹配规则 use使用什么loader
+- **loader的配置方法：test匹配规则 use使用什么loader**
   - use的用法
-  1.字符串 只能写一个loader
-  ```
-  use:"css-loader"
-  ```
-  2.数组 可以写多个loader 数组里面可以放字符串和对象
-    - css-loader 解析require/import语法
-    - style-loader 把css插入到header标签中
-    ```
-    use:["style-loader","css-loader"]
-    ```
-    - loader的执行顺序是从右到左 从下到上
-    ```
-    rules:[
-      {
-        test:'/\.css/',  // 配置到css
-        use:[]
-      }
-    ]
-    
-    ```
-- use 可以直接写loader，也可以写对象，写成对象的时候可以进行配置
-```
-yarn add css-loader style-loader -D
+  	- 1. 字符串 只能写一个loader
+	  ```
+	  use:"css-loader"
+	  ```
+  	- 2. 数组 可以写多个loader,数组里面可以放字符串和对象
+		- css-loader 解析require/import语法
+		- style-loader 把css插入到header标签中
+			```
+			use:["style-loader","css-loader"]
+			```
+    	- loader的执行顺序是从右到左 从下到上
+			```
+			rules:[
+			  {
+				test:'/\.css/',  // 配置到css
+				use:[]
+			  }
+			]
+			```
+   > use 可以直接写loader，也可以写对象，写成对象的时候可以进行配置
+		```
+		yarn add css-loader style-loader -D
 
-{
-  loader:'style-loader',
-  options:{
-    insertAt:'top'    // css 放置位置可以决定css的优先级
-  }
-}
+		{
+		  loader:'style-loader',
+		  options:{
+			insertAt:'top'    // css 放置位置可以决定css的优先级
+		  }
+		}
+		```
 ```
 - 目录结构
   - src
@@ -153,6 +160,7 @@ yarn add css-loader style-loader -D
     - index.js
     - style.css
     - b.less
+```
 - 配置less编译(less->css) 因为从右向左，从下到上执行 所以写在下边和右边
 ```
 yarn add less less-loader -D
@@ -179,7 +187,7 @@ yarn add stylus stylus-loader
 
 ##  抽离css
 ``` 
-* yarn add mini-css-extract-plugin -D
+yarn add mini-css-extract-plugin -D
 ```
 - MiniCssExtractPlugin 插件自带一个loader
 - MiniCssExtractPlugin.loader 会自动把css抽离出来，作为外部引用的方式引入页面
@@ -188,7 +196,7 @@ new MiniCssExtractPlugin({
   filename:'main.css'  // 抽离出来的css的文件名
 })
 ```
-用 MiniCssExtractPlugin.loader 代替 style-loader 可以进行抽离 
+> 用 MiniCssExtractPlugin.loader 代替 style-loader 可以进行抽离 
 - 在loader里面的写法:
 ```
 {
@@ -200,7 +208,7 @@ new MiniCssExtractPlugin({
 
 ## 使用 postcss-loader(必配),autoprefixer 添加浏览器前缀 
 ```
-* yarn add postcss-loader autoprefixer -D 
+yarn add postcss-loader autoprefixer -D 
 
 {
   test:/\.less$/,
@@ -218,15 +226,14 @@ npm run dev的时候会报错:
 Error: No PostCSS Config found in: /Users/ruanye/Desktop/project/src
 没有找到postcss的默认文件
 ```
-- * 需要配置postcss默认文件 在根目录下创建postcss.config.js
-postcss.config.js 文件内容：
+- **需要配置postcss默认文件 在根目录下创建postcss.config.js**
 ```
 module.exports={
     plugins:[require('autoprefixer')]
 }
 ```
 
-## * 配置优化项
+## `配置优化项`
 ```
 yarn add optimize-css-assets-webpack-plugin uglifyjs-webpack-plugin -D 
 // optimize:优化  assets:资源
@@ -246,9 +253,11 @@ optimization: { // 优化项
 - npm run build 打包之后 css是压缩过的
 
 ## 处理js es6转化成es5
-- * yarn add babel-loader @babel/core @babel/preset-env
-  - @babel/core babel 核心模块
-  - @babel-preset-env 标准语法转化成低级语法
+```
+yarn add babel-loader @babel/core @babel/preset-env
+// @babel/core babel 核心模块
+// @babel-preset-env 标准语法转化成低级语法
+```
 - presests 预设
 - 箭头函数 arrow-functions
 - class 和 es6@ 等(装饰器需要安装额外的插件) 并且添加plugins集合
@@ -278,11 +287,11 @@ require("@babel/polyfill")
 ```
 
 ## 配置需要设置loader的文件路径  
-- * include 包含  
+- **include 包含**
 ```
 include:path.resolve(__dirname,'src'), 
 ```
-- * exclude 不包含  
+- **exclude 不包含**  
 ```
 exclude:/node_modules/
 ```
@@ -315,7 +324,7 @@ exclude:/node_modules/
 ## js语法校验
 - yarn add eslint eslint-loader -D
 - eslint 官网 eslint.org
-- * 添加enforce pre 强制先执行 previous 前置loader
+- **添加enforce pre 强制先执行 previous 前置loader**
 - 另一种配置方法 .eslint.js
 ```
 module.expors:{
@@ -336,7 +345,7 @@ module.expors:{
 yarn add jquery  
 yarn add expose-loader -D
 ```
-- expose-loader  // 暴露全局的loader
+- expose-loader  暴露全局的loader
   1. 内联loader的方式配置
   ```
   import $ from "expose-loader?$!jquery"
@@ -388,7 +397,7 @@ yarn add file-loader html-withimg-loader url-loader -D
   user:'file-loader'
 }
 ```
-- * 在html 引入图片 打包会找不到文件 需要使用 html-withimg-loader
+- **在html 引入图片 打包会找不到文件 需要使用 html-withimg-loader**
 url-loader 
 html-withimg-loader
 ```
@@ -397,7 +406,7 @@ html-withimg-loader
   user:'html-withimg-loader'
 }
 ```
-- * 在图片非常小的情况下不希望走http请求，一般情况下不会直接使用file-loader 通常使用 url-loader
+- **在图片非常小的情况下不希望走http请求，一般情况下不会直接使用file-loader 通常使用 url-loader**
 - 在图片小于多少k的时候可以做一个限制，用base64来转化,base64大小会比原来文件大3分之一  
 ```
 {
@@ -411,7 +420,7 @@ html-withimg-loader
 }
 ```
 
-## * 打包文件分类 
+## `打包文件分类`
 1. 图片loader的options 里面添加
 ```
 options:{
@@ -479,7 +488,7 @@ plugins:[
 ]
 ```
 
-## * 配置 soure-map 源码映射
+## `配置 soure-map 源码映射`
 作用：用来调试源码 
 ```
 devtools:'source-map'
@@ -490,7 +499,7 @@ devtools:'source-map'
 - cheap-module-source-map 不会产生列 但是会产生一个单独的文件 
 - cheap-module-eval-source-map 不会产生文件也不会产生列 会直接集成在文件里 
 
-##实时编译
+## 实时编译
 （很少用）
 watch:true 
 - 监控的选项
@@ -502,15 +511,15 @@ watchOptions:{
 }
 ```
 
-## * webpcak 常用插件
-- * CleanWebpackPlugin  清除缓存插件,可以写字符串 也可以写成数组
+## `webpcak 常用插件`
+- **CleanWebpackPlugin  清除缓存插件,可以写字符串 也可以写成数组**
 ```
 yarn add clean-webpack-plugin
 
 new CleanWebpackPlugin('./dist'),
 new CleanWebpackPlugin(['./dist','./img'])
 ```
-- * CopyWebpackPlugin  拷贝插件
+- **CopyWebpackPlugin  拷贝插件**
 ```
 yarn add copy-webpack-plugin
 
@@ -527,7 +536,7 @@ new webpack.BannerPlugin('made 2019 by sxq')
 ```
 
 ## webpack 跨域
-1. * 代理的方式  重写的方式 把请求代理到express服务器上 
+1. **代理的方式  重写的方式 把请求代理到express服务器上** 
 ```
 devServer:{
   ···
@@ -564,8 +573,8 @@ app.use(middle(compiler));
 
 ## resolve用法
 - modules：可以直接指定查找的目录层级，不再往上级目录寻找
-- * extensions 拓展名 作用：在import引用时可以省略文件后缀，它会自己查找
-- * alias:别名  
+- **extensions 拓展名 作用：在import引用时可以省略文件后缀，它会自己查找
+- **alias:别名  
 ```
 bootstrap:"bootstrap/dist/css/bootstrap.css"
 名字：后面是对应的路径
