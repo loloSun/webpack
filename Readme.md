@@ -573,8 +573,8 @@ app.use(middle(compiler));
 
 ## resolve用法
 - modules：可以直接指定查找的目录层级，不再往上级目录寻找
-- **extensions 拓展名 作用：在import引用时可以省略文件后缀，它会自己查找
-- **alias:别名  
+- **extensions 拓展名 作用：在import引用时可以省略文件后缀，它会自己查找*
+- **alias:别名**
 ```
 bootstrap:"bootstrap/dist/css/bootstrap.css"
 名字：后面是对应的路径
